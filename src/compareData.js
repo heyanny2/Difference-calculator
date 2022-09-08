@@ -1,22 +1,41 @@
 import _ from 'lodash';
 
 const compareData = (file1, file2) => {
-  const uniqueKeys = _.uniq(...file1, ...file2);
-  const sortedUniqueKeys = _.sortBy(uniqueKeys);
-
-  const result = sortedUniqueKeys.map((key) => {
-    if (_.has(file1, key)) && file2.includes(key)) {
-      return `  ${key}`; 
+  const keys1 = _.keys(file1);
+  const keys2 = _.keys(file2);
+  const sortedKeys = _.sortBy(_.union(keys1, keys2));
+  
+  
+  const result = sortedKeys.map((key) => {
+    if (!_.has(file1, key)) {
+      return {
+        key,
+        value: file2[key],
+        type: 'added',
+      }; 
     }
-    if (file1.includes(key) && !file2.includes(key)) {
-      return `- ${key}`;
+    if (!_.has(file2, key)) {
+      return {
+        key,
+        value: file1[key],
+        type: 'deleted',
+      };
+    } 
+    if (file1[key] !== file2[key]){
+      return {
+        key,
+        valueBefore: file1[key],
+        valueAfter: file2[key],
+        type: 'changed',
+      };
     }
-    if (!file1.includes(key) && file2.includes(key)) {
-      return `- ${key}`;
-    }
-  })
+    return {
+      key,
+      value: file1[key],
+      type: 'unchanged'
+    };
+  });
+  return result;
 };
-export default compareData;
 
-//сравнить файл1 и файл2 с уникальным массивом,
-//если нет а файл1 
+export default compareData;

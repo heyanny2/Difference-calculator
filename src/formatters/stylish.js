@@ -25,9 +25,10 @@ const output = (value, depth = 1) => {
     case 'added':
     case 'deleted':
     case 'unchanged':
-      return `${makeIndent(depth)}${symbols[value.type]} ${value.key}: ${stringify(value, depth)}`;
+      return `${makeIndent(depth)}${symbols[value.type]} ${value.key}: ${stringify(value.value, depth)}`;
     case 'changed':
-      return `${makeIndent(depth)}${symbols.deleted} ${value.key}: ${stringify(value, depth)}\n${makeIndent(depth)}${symbols.added} ${value.key}: ${stringify(value, depth)}`;
+      return `${makeIndent(depth)}${symbols.deleted} ${value.key}: ${stringify(value.valueBefore, depth)
+      }\n${makeIndent(depth)}${symbols.added} ${value.key}: ${stringify(value.valueAfter, depth)}`;
     default:
       throw new Error(`Unknown type: ${value.type}`);
   }

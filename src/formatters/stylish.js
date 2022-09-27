@@ -4,6 +4,7 @@ const symbols = {
   added: '+',
   deleted: '-',
   unchanged: ' ',
+  nested: ' ',
 };
 
 const makeIndent = (depth) => {
@@ -29,6 +30,9 @@ const output = (value, depth = 1) => {
     case 'changed':
       return `${makeIndent(depth)}${symbols.deleted} ${value.key}: ${stringify(value.valueBefore, depth)
       }\n${makeIndent(depth)}${symbols.added} ${value.key}: ${stringify(value.valueAfter, depth)}`;
+    case 'nested':
+      return `${makeIndent(depth)}${symbols[value.type]} ${value.key}: {${value.children
+        .map((val) => output(val, depth + 1)).join('\n')}\n ${makeIndent(depth)}}`
     default:
       throw new Error(`Unknown type: ${value.type}`);
   }

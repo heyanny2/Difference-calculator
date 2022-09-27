@@ -29,6 +29,13 @@ const compareData = (file1, file2) => {
         type: 'changed',
       };
     }
+    if(_.isObject(file1[key]) && _.isObject(file2[key])){
+      return {
+        key,
+        type: 'nested',
+        children: compareData(file1[key], file2[key]),
+      };
+    }
     return {
       key,
       value: file1[key],

@@ -18,7 +18,7 @@ const stringify = (value, depth = 1) => {
     } 
     const keys = Object.keys(value);
     const getKeys = keys.map((key) => `${makeIndent(depth + 1)}  ${key}: ${stringify(value[key], depth + 1)}`);
-    return `{\n${getKeys.join('\n')}\n${makeIndent(depth)}}`;
+    return `{\n${getKeys.join('\n')}\n  ${makeIndent(depth)}}`;
 };
 
 const output = (value, depth = 1) => {
@@ -31,8 +31,8 @@ const output = (value, depth = 1) => {
       return `${makeIndent(depth)}${symbols.deleted} ${value.key}: ${stringify(value.valueBefore, depth)
       }\n${makeIndent(depth)}${symbols.added} ${value.key}: ${stringify(value.valueAfter, depth)}`;
     case 'nested':
-      return `${makeIndent(depth)}${symbols[value.type]} ${value.key}: {${value.children
-        .map((val) => output(val, depth + 1)).join('\n')}\n ${makeIndent(depth)}}`
+      return `${makeIndent(depth)}  ${value.key}: {\n${value.children
+        .map((val) => output(val, depth + 1)).join('\n')}\n ${makeIndent(depth)} }`
     default:
       throw new Error(`Unknown type: ${value.type}`);
   }

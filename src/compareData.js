@@ -20,20 +20,20 @@ const compareData = (file1, file2) => {
         value: file1[key],
         type: 'deleted',
       };
-    } 
-    if (file1[key] !== file2[key]){
-      return {
-        key,
-        valueBefore: file1[key],
-        valueAfter: file2[key],
-        type: 'changed',
-      };
     }
     if(_.isObject(file1[key]) && _.isObject(file2[key])){
       return {
         key,
         type: 'nested',
         children: compareData(file1[key], file2[key]),
+      };
+    }
+    if (file1[key] !== file2[key]){
+      return {
+        key,
+        valueBefore: file1[key],
+        valueAfter: file2[key],
+        type: 'changed',
       };
     }
     return {

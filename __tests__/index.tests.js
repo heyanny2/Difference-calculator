@@ -13,7 +13,9 @@ const options = [
   ['file1.json', 'file2.json', 'StylishTestResult.txt', 'stylish'],
   ['file1.yaml', 'file2.yml', 'StylishTestResult.txt', 'stylish'],
   ['file1.json', 'file2.json', 'PlainTestResult.txt', 'plain'],
-  ['file1.yaml', 'file2.yml', 'PlainTestResult.txt', 'plain']
+  ['file1.yaml', 'file2.yml', 'PlainTestResult.txt', 'plain'],
+  ['file1.json', 'file2.json', 'jsonTestResult.txt', 'json'],
+  ['file1.yaml', 'file2.yml', 'jsonTestResult.txt', 'json'],
 ];
 
 test.each(options)('testing different file options', (file1, file2, resultFile, format) => {

@@ -16,8 +16,11 @@ make link
 # help
 gendiff -h
 
-# compare files:
+# compare files: default format:
 gendiff file1.json file2.yml
+
+# compare files: choost format:
+gendiff -f formatName file1.json file2.yml
 ```
 
 ## Compare JSON/YAML files with default format

@@ -10,12 +10,12 @@ const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', 
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
 const options = [
-  ['file1.json', 'file2.json', 'StylishTestResult.js', 'stylish'],
-  ['file1.yaml', 'file2.yml', 'StylishTestResult.js', 'stylish'],
-  ['file1.json', 'file2.json', 'PlainTestResult.js', 'plain'],
-  ['file1.yaml', 'file2.yml', 'PlainTestResult.js', 'plain'],
-  ['file1.json', 'file2.json', 'jsonTestResult.js', 'json'],
-  ['file1.yaml', 'file2.yml', 'jsonTestResult.js', 'json'],
+  ['file1.json', 'file2.json', 'StylishTestResult.txt', 'stylish'],
+  ['file1.yaml', 'file2.yml', 'StylishTestResult.txt', 'stylish'],
+  ['file1.json', 'file2.json', 'PlainTestResult.txt', 'plain'],
+  ['file1.yaml', 'file2.yml', 'PlainTestResult.txt', 'plain'],
+  ['file1.json', 'file2.json', 'jsonTestResult.txt', 'json'],
+  ['file1.yaml', 'file2.yml', 'jsonTestResult.txt', 'json'],
 ];
 
 test.each(options)('testing different file options', (file1, file2, resultFile, format) => {
@@ -24,7 +24,7 @@ test.each(options)('testing different file options', (file1, file2, resultFile, 
 });
 
 test('testing default option', () => {
-  const expected = readFile('StylishTestResult.js');
+  const expected = readFile('StylishTestResult.txt');
   const actual = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'));
   expect(actual).toBe(expected);
 });

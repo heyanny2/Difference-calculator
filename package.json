@@ -1,7 +1,7 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
-  "description": "[![Actions Status](https://github.com/heyanny2/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/heyanny2/frontend-project-46/actions)",
+  "description": "Hexlet frontend project level 2",
   "main": "src/index.js",
   "scripts": {
     "test": "npx jest"

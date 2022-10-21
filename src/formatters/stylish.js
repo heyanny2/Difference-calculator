@@ -21,7 +21,7 @@ const stringify = (value, depth = 1) => {
     return `{\n${getKeys.join('\n')}\n  ${makeIndent(depth)}}`;
 };
 
-const output = (value, depth = 1) => {
+const getStylishFormat = (value, depth = 1) => {
   switch(value.type) {
     case 'added':
     case 'deleted':
@@ -32,11 +32,11 @@ const output = (value, depth = 1) => {
       }\n${makeIndent(depth)}${symbols.added} ${value.key}: ${stringify(value.valueAfter, depth)}`;
     case 'nested':
       return `${makeIndent(depth)}  ${value.key}: {\n${value.children
-        .map((val) => output(val, depth + 1)).join('\n')}\n ${makeIndent(depth)} }`
+        .map((val) => getStylishFormat(val, depth + 1)).join('\n')}\n ${makeIndent(depth)} }`
     default:
       throw new Error(`Unknown type: ${value.type}`);
   }
   
 }
 
-export default (diff) => `{\n${diff.map((value) => output(value, 1)).join('\n')}\n}`;
+export default (diff) => `{\n${diff.map((value) => getStylishFormat(value, 1)).join('\n')}\n}`;

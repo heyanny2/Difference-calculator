@@ -11,7 +11,7 @@ const format = (data, formatName) => {
       return plain(data);
     }
     case 'json': {
-      return json;
+      return json(data);
     }
     default:
       throw new Error('Invalid format');

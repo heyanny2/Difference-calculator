@@ -39,4 +39,4 @@ const getStylishFormat = (value, depth = 1) => {
   
 }
 
-export default (diff) => `{\n${diff.map((value) => getStylishFormat(value, 1)).join('\n')}\n}\n`;
+export default (diff) => `{\n${diff.map((value) => getStylishFormat(value, 1)).join('\n')}\n}`;

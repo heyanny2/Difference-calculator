@@ -5,6 +5,9 @@ name: 'project test'
 on:
   - push
   - pull_request
+  
+env:
+  CI: true
 
 jobs:
   build:
@@ -24,6 +27,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node }}
+        cache: 'npm'
       # Run install project
     - name: npm install
       run: |
@@ -36,7 +40,7 @@ jobs:
     - name: Test & publish code coverage
         # Publish code coverage on Code Climate
         # https://github.com/paambaati/codeclimate-action
-      uses: paambaati/codeclimate-action@v3.0.0
+      uses: paambaati/codeclimate-action@v3.2.0
         # Add Code Climate secret key
       env:
           CC_TEST_REPORTER_ID: ${{ secrets.TEST_COVERAGE }}
